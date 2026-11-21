@@ -1,11 +1,6 @@
 """
 fetch_metadata.py — System & Environment Diagnostic Script
 Data Science Club (DSC KLE) — Sprint Challenge Week 1
-
-Instructions for Recruits:
-1. Fill in your personal student metadata variables below.
-2. Complete the collect_environment_metadata() function.
-3. Run this script via: `python src/fetch_metadata.py`
 """
 
 import sys
@@ -15,23 +10,18 @@ from datetime import datetime, timezone
 import json
 
 # ==============================================================================
-# RECRUIT METADATA (Fill these in with your real details)
+# RECRUIT METADATA
 # ==============================================================================
-STUDENT_USN = "01FE25BCI031"        # e.g., "01FE25BCS122"
-STUDENT_NAME = "Srushti Naikoji"     # e.g., "Ajay Mallappa"
-BRANCH = "CSI"                      # e.g., "CSE", "AI/DS", "ECE"
-TRACK = "CREDIT_TRACK_YEAR2"        # "CREDIT_TRACK_YEAR2" or "GROWTH_TRACK_YEAR1"
+STUDENT_USN = "01FE25BCI031"
+STUDENT_NAME = "Srushti Naikoji"
+BRANCH = "CSI"
+TRACK = "CREDIT_TRACK_YEAR2"
 
 
 def collect_environment_metadata() -> dict:
     """
     Collects runtime diagnostic metadata from the host environment.
-    
-    Returns:
-        dict: Diagnostic details including python version, OS platform,
-              active virtualenv status, and ISO timestamp.
     """
-    # Check if currently executing inside a virtual environment
     is_in_venv = (
         hasattr(sys, 'real_prefix') or
         (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix)
@@ -63,12 +53,7 @@ def main():
 
     data = collect_environment_metadata()
 
-    # Validation guard for recruit details
-    if "XXXX" in data["student"]["usn"] or data["student"]["name"] == "Your Full Name":
-        print("\n⚠️ WARNING: Please update STUDENT_USN and STUDENT_NAME in src/fetch_metadata.py!")
-    else:
-        print(f"\n[OK] Registered to: {data['student']['name']} ({data['student']['usn']})")
-
+    print(f"\n[OK] Registered to: {data['student']['name']} ({data['student']['usn']})")
     print(f"[OK] Python: {data['environment']['python_version']} on {data['environment']['os_platform']}")
     print(f"[OK] Virtual Environment Active: {data['environment']['in_virtualenv']}")
     print("\nFull System Metadata Payload:")
